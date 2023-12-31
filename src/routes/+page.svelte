@@ -17,23 +17,32 @@
     selected = onChangeSelected;
     loading = false;
   }
+
+  const tooltiptext = 'refresh data';
 </script>
 
 <main class="container">
-  <div class="grid">
-    <div>
-      <select bind:value={onChangeSelected} on:change={getData}>
-        <option value="" disabled selected>Select</option>
-        {#each options as option, i}
-          <option>{option}</option>
-        {/each}
-      </select>
-    </div>
-    <button aria-busy={loading} class="outline" on:click={getData} disabled={loading}>
-      {loading ? '' : '🔄'}
-    </button>
-  </div>
-  <div>
+  <nav>
+    <ul>
+      <li><strong>App</strong></li>
+    </ul>
+  </nav>
+
+  <article>
+    <header>
+      <div class="grid">
+        <select bind:value={onChangeSelected} on:change={getData}>
+          <option value="" disabled selected>Select</option>
+          {#each options as option, i}
+            <option>{option}</option>
+          {/each}
+        </select>
+        <button aria-busy={loading} data-tooltip={tooltiptext} class="outline" on:click={getData} disabled={loading}>
+          {loading ? '' : '🔄'}
+        </button>
+      </div>
+    </header>
+
     <table>
       <thead>
         <tr>
@@ -72,5 +81,9 @@
         </tr>
       </tbody>
     </table>
-  </div>
+    <footer>
+      <h6>Info</h6>
+      <p>This is where information goes</p>
+    </footer>
+  </article>
 </main>
