@@ -1,38 +1,29 @@
-# create-svelte
+# Svelte+Pico
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+## prerequisites
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+- [bun](https://bun.sh)
 
 ## Developing
 
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
 ```bash
-npm run dev
+bun run dev
 
 # or start the server and open the app in a new browser tab
-npm run dev -- --open
+bun run dev -- --open
 ```
 
 ## Building
 
-To create a production version of your app:
+To create a production version of your app and run it
 
 ```bash
-npm run build
+bun run build
+cd build
+# required environment variables, see: https://github.com/gornostay25/svelte-adapter-bun?tab=readme-ov-file#desktop_computer-environment-variables
+export PROTOCOL_HEADER=x-forwarded-proto
+export HOST_HEADER=x-forwarded-host
+bun run start
 ```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
