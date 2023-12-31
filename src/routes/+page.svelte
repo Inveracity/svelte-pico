@@ -1,5 +1,6 @@
 <script lang="ts">
   import { sleep } from '$lib/sleep';
+  import Table from '$lib/components/Table.svelte';
 
   var count = 1;
 
@@ -14,73 +15,41 @@
     loading = true;
     await sleep(500);
     count += 1;
-    selected = onChangeSelected;
+    selected = onChangeSelected.trim();
     loading = false;
   }
-
-  const tooltiptext = 'refresh data';
 </script>
 
 <main class="container">
   <nav>
     <ul>
-      <li><strong>App</strong></li>
+      <li><h3>The greatest app ever made</h3></li>
     </ul>
   </nav>
 
   <article>
     <header>
       <div class="grid">
-        <select bind:value={onChangeSelected} on:change={getData}>
-          <option value="" disabled selected>Select</option>
-          {#each options as option, i}
-            <option>{option}</option>
-          {/each}
-        </select>
-        <button aria-busy={loading} data-tooltip={tooltiptext} class="outline" on:click={getData} disabled={loading}>
-          {loading ? '' : '🔄'}
-        </button>
+        <div>
+          <select bind:value={onChangeSelected} on:change={getData}>
+            <option value="" disabled selected>Select a fruit</option>
+            {#each options as option, i}
+              <option>
+                {option}
+              </option>
+            {/each}
+          </select>
+        </div>
+        <div>
+          <button aria-busy={loading} on:click={getData} disabled={loading}>
+            {loading ? '' : '🔄'}
+          </button>
+        </div>
       </div>
     </header>
 
-    <table>
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Heading</th>
-          <th scope="col">Heading</th>
-          <th scope="col">Heading</th>
-          <th scope="col">Heading</th>
-          <th scope="col">Heading</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">{count}</th>
-          <td>{selected}</td>
-          <td>{selected}</td>
-          <td>{selected}</td>
-          <td>{selected}</td>
-          <td>{selected}</td>
-        </tr>
-        <tr>
-          <th scope="row">{count}</th>
-          <td>{selected}</td>
-          <td>{selected}</td>
-          <td>{selected}</td>
-          <td>{selected}</td>
-          <td>{selected}</td>
-        </tr>
-        <tr>
-          <th scope="row">{count}</th>
-          <td>{selected}</td>
-          <td>{selected}</td>
-          <td>{selected}</td>
-          <td>{selected}</td>
-          <td>{selected}</td>
-        </tr>
-      </tbody>
-    </table>
+    <Table data={selected} {count} />
+
     <footer>
       <h6>Info</h6>
       <p>This is where information goes</p>
