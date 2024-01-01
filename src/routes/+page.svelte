@@ -29,23 +29,19 @@
 
   <article>
     <header>
-      <div class="grid">
-        <div>
-          <select bind:value={onChangeSelected} on:change={getData}>
-            <option value="" disabled selected>Select a fruit</option>
-            {#each options as option, i}
-              <option>
-                {option}
-              </option>
-            {/each}
-          </select>
-        </div>
-        <div>
-          <button aria-busy={loading} on:click={getData} disabled={loading}>
-            {loading ? '' : '🔄'}
-          </button>
-        </div>
-      </div>
+      <form role="group">
+        <select bind:value={onChangeSelected} on:change={getData}>
+          <option value="" disabled selected>Select a fruit</option>
+          {#each options as option, i}
+            <option>
+              {option}
+            </option>
+          {/each}
+        </select>
+        <button aria-busy={loading} on:click={getData} disabled={loading}>
+          {loading ? '' : '🔄'}
+        </button>
+      </form>
     </header>
 
     <Table data={selected} {count} />
